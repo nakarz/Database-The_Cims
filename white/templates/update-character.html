@@ -1,0 +1,61 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} Update Tokoh {% endblock %}
+
+{% block content %}
+{% include "navbar.html" %}
+
+<div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+    <h3>Form Update Tokoh</h3>
+    <hr>
+    <form action="" method="POST" class="d-flex flex-column justify-content-center w-50 mx-auto">
+        {% csrf_token %}
+        <div class="mb-3 d-flex justify-content-center gap-3">
+            <label class="form-label" for="name">Nama:</label>
+            <input disabled type="text" id="name" name="name" value="{{character.nama }}" class="form-control">
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center gap-3">
+            <label class="form-label" for="hair">ID rambut:</label>
+            <select class="form-select" required id="hair" name="hair">
+                {% for hair in hairs %}
+                    {% if hair.id_koleksi == character.id_rambut %}
+                        <option selected>{{ hair.id_koleksi }}</option>
+                    {% else %}
+                        <option>{{ hair.id_koleksi }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center gap-3">
+            <label class="form-label" for="eyes">ID mata:</label>
+            <select class="form-select" required id="eyes" name="eyes">
+                {% for eye in eyes %}
+                    {% if eye.id_koleksi == character.id_mata %}
+                        <option selected>{{ eye.id_koleksi }}</option>
+                    {% else %}
+                        <option>{{ eye.id_koleksi }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center gap-3">
+            <label class="form-label" for="house">ID rumah:</label>
+            <select class="form-select" required id="house" name="house">
+                {% for house in houses %}
+                    {% if house.id_koleksi == character.id_rumah %}
+                        <option selected>{{ house.id_koleksi }}</option>
+                    {% else %}
+                        <option>{{ house.id_koleksi }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-outline-dark mx-auto">Simpan</button>
+    </form>
+</div>
+
+{% endblock %}

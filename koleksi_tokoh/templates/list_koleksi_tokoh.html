@@ -1,0 +1,53 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} The Cims {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="w-50 mx-auto my-3 text-center">
+        <h3>LIST KOLEKSI TOKOH</h3>
+        <table class="table table-bordered border-dark">
+            <tr>
+
+                <th scope="col">No.</th>
+                <th scope="col">Tokoh</th>
+                <th scope="col">Id Koleksi</th>
+
+                {% if role == 'admin' %}
+                <th scope="col"> Username Pengguna </th>
+                {% endif %}
+                
+                {% if role != 'admin' %}
+                <th> Action </th>
+                {% endif %}
+            </tr>
+
+            {% for data in result %}
+            <tr scope="row">
+                <td>{{ forloop.counter }}.</td>
+
+                {% if role == 'admin' %}
+                <td>{{ data.username_pengguna }}</td>
+                <td>{{ data.nama_tokoh }}</td>
+                <td>{{ data.id_koleksi}}</td>
+                {% endif %}
+
+                {% if role != 'admin' %}
+                <td>{{ data.nama_tokoh }}</td>
+                <td>{{ data.id_koleksi}}</td>
+                {% endif %}
+                
+                {% if role != 'admin' %}
+                <td class="d-flex justify-content-center gap-3"> 
+                    <a href="/koleksi_tokoh/delete/{{ data.nama_tokoh }}">
+                        <button type="button" class="btn btn-danger" >
+                            JUAL
+                        </button>
+                    </a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

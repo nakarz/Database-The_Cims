@@ -1,0 +1,38 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} Makan {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="card mx-auto m-5" style="width: 60%">
+    <div class="card-body">
+        <div class="text-center">
+            <h3>List Makan</h3>
+            <hr>
+        </div>
+        <table class="table table-striped">
+            <caption>Makan</caption>
+            <tr>
+                <th>No</th>
+                {% if is_admin %}
+                <th>Username Pengguna</th>
+                {% endif %}
+                <th>Tokoh</th>
+                <th>Nama Makanan</th>
+                <th>Waktu</th>
+            </tr>
+            {% for eat in eats %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                {% if is_admin %}
+                <td>{{ eat.username_pengguna }}</td>
+                {% endif %}
+                <td>{{ eat.nama_tokoh }}</td>
+                <td>{{ eat.nama_makanan }}</td>
+                <td>{{ eat.waktu | date:'Y-m-d H:i:s' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

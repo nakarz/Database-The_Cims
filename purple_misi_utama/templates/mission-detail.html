@@ -1,0 +1,48 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} Detail Misi Utama {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="card mx-auto m-5" style="width:40%">
+  <div class="card-body">
+    <div class="text-center">
+      <h3>Detail Misi Utama: {{ mission.nama }}</h3>
+      <hr>
+    </div>
+    <table class="table table-striped text-center">
+      <caption>Detail Misi {{ mission.nama }}</caption>
+      <tr>
+        <td class="text-start">Nama</td>
+        <td class="text-start">{{ mission.nama }}</td></tr>
+      <tr>
+        <td class="text-start">Efek Energi</td>
+        <td class="text-start">{{ mission.efek_energi }}</td></tr>
+      <tr>
+        <td class="text-start">Efek Hubungan Sosial</td>
+        <td class="text-start">{{ mission.efek_hubungan_sosial }}</td></tr>
+      <tr>
+        <td class="text-start">Efek Kelaparan</td>
+        <td class="text-start">{{ mission.efek_kelaparan }}</td></tr>
+      <tr>
+        <td class="text-start">Syarat Energi</td>
+        <td class="text-start">{{ mission.syarat_energi }}</td></tr>
+      <tr>
+        <td class="text-start">Syarat Hubungan Sosial</td>
+        <td class="text-start">{{ mission.syarat_hubungan_sosial }}</td></tr>
+      <tr>
+        <td class="text-start">Syarat Kelaparan</td>
+        <td class="text-start">{{ mission.syarat_kelaparan }}</td></tr>
+      <tr>
+        <td class="text-start">Completion Time</td>
+        <td class="text-start">{{ time }} menit</td></tr>
+      <tr>
+        <td class="text-start">Reward Koin</td>
+        <td class="text-start">{{ mission.reward_koin }}</td></tr>
+      <tr>
+        <td class="text-start">Reward XP</td>
+        <td class="text-start">{{ mission.reward_xp }}</td></tr>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

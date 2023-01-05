@@ -1,0 +1,21 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} Detail Tokoh {% endblock %}
+
+{% block content %}
+{% include "navbar.html" %}
+
+<div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+    <h3>Detail Tokoh</h3>
+    <hr>
+    <p>Nama: {{character.nama }}</p>
+    <p>ID rambut: {{character.id_rambut }}</p>
+    <p>ID mata: {{character.id_mata }}</p>
+    <p>ID rumah: {{character.id_rumah }}</p>
+    <p>Warna kulit: {{character.warna_kulit }}</p>
+    <p>Pekerjaan: {{character.pekerjaan }}</p>
+    <a href="/character" role="button" class="btn btn-danger">BACK</a>
+    
+</div>
+
+{% endblock %}

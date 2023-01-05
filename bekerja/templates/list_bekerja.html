@@ -1,0 +1,45 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} The Cims {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="w-50 mx-auto my-3 text-center">
+        <h3>LIST BEKERJA</h3>
+        <table class="table table-bordered border-dark">
+            
+            <tr>
+                <th scope="col">No</th>
+                
+                {% if role == 'admin' %}
+                <th scope="col">Username Pemain</th>
+                {% endif %}
+                
+                <th scope="col">Nama Tokoh</th>
+                <th scope="col">Nama Pekerjaan</th>
+                <th scope="col">Timestamp</th>
+                <th scope="col">Keberangkatan</th>
+                <th scope="col">Honor</th>
+            </tr>
+            
+            {% for data in result %}
+            <tr scope="row">
+                <td>{{ forloop.counter }}.</td>
+                
+                {% if role == 'admin' %}
+                <td>{{ data.username_pengguna }}</td>
+                {% endif %}
+                
+                <td>{{ data.nama_tokoh }}</td>
+                <td>{{ data.nama_pekerjaan }}</td>
+                <td>{{ data.timestamp }}</td>
+                <td>{{ data.jumlah_keberangkatan}}</td>
+                <td>{{ data.honor }}</td>
+            
+            </tr>
+            {% endfor %}
+        
+        </table>
+    </div>
+{% endblock %}

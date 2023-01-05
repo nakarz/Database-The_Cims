@@ -1,0 +1,34 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} The Cims - Create Koleksi Tokoh {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM BUAT KOLEKSI TOKOH</h3>
+        <hr>
+        <form method="POST" action="/koleksi_tokoh/create_new_koleksi_tokoh/">
+            {% csrf_token %}
+            <div class="mb-3 d-flex gap-3 justify-content-center w-50 mx-auto">
+                <p>Nama Tokoh: </p>
+                <select id="select-data-tokoh" name="pilihan_tokoh" class="form-select h-50" onchange="getValueFromSelect()">
+                    <option disabled selected>Pilih Nama Tokoh</option>
+                    {% for data in result1 %}
+                    <option>{{ data.nama }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3 d-flex gap-3 justify-content-center w-50 mx-auto">
+                <p>ID Koleksi: </p>
+                <select id="select-data-id-koleksi" name="pilihan_id_koleksi" class="form-select h-50" onchange="getValueFromSelect()">
+                    <option disabled selected>Pilih ID Koleksi</option>
+                    {% for data in result2 %}
+                    <option>{{ data.id }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">SIMPAN</button>
+        </form>
+    </div> 
+{% endblock %}

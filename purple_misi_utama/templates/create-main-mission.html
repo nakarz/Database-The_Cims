@@ -1,0 +1,71 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} Buat Misi Utama {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="card mx-auto m-5" style="width: 50%">
+    <div class="card-body">
+        <div class="text-center">
+            <h3>Form Buat Misi Utama</h3>
+            <hr>
+        </div>
+
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label" for="name">Nama misi utama:</label>
+                    <input class="form-control" required id="name" name="name" type="text">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="energy">Efek energi:</label>
+                    <input class="form-control" required id="energy" name="energy" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="social">Efek hubungan sosial:</label>
+                    <input class="form-control" required id="social" name="social" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="hunger">Efek kelaparan:</label>
+                    <input class="form-control" required id="hunger" name="hunger" type="number">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="req_energy">Syarat energi:</label>
+                    <input class="form-control" required id="req_energy" name="req_energy" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="req_social">Syarat hubungan sosial:</label>
+                    <input class="form-control" required id="req_social" name="req_social" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="req_hunger">Syarat kelaparan:</label>
+                    <input class="form-control" required id="req_hunger" name="req_hunger" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="completion_time">Completion time:</label>
+                    <input class="form-control" required id="completion_time" name="completion_time" type="time">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="coin">Reward koin:</label>
+                    <input class="form-control" required id="coin" name="coin" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="xp">Reward xp:</label>
+                    <input class="form-control" required id="xp" name="xp" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="desc">Deskripsi:</label>
+                    <input class="form-control" id="desc" name="desc" type="text">
+                </div>
+
+                <div class="justify-content-around d-flex">
+                    <button type="submit" class="btn btn-outline-dark">Simpan</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

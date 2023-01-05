@@ -1,0 +1,41 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} List Warna Kulit {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="w-50 mx-auto my-3 text-center">
+        <h3>LIST WARNA KULIT</h3>
+        <table class="table table-bordered border-dark">
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Kode</th>
+
+                {% if role == 'admin' %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+
+            {% for data in result %}
+            <tr scope="row">
+                <td>{{ forloop.counter }}.</td>
+                <td>{{ data.kode }}</td>
+                {% if role == 'admin' %}
+                    {% if data.deleteable == True %}
+                        <td>
+                            <a href='/warna_kulit/delete/{{ data.kode|slice:"1:" }}'>
+                                <button type="button" class="btn btn-danger" >
+                                    DELETE
+                                </button>
+                            </a>
+                        </td>
+
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

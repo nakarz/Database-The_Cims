@@ -1,0 +1,42 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} The Cims {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="w-50 mx-auto my-3 text-center">
+        <h3>LIST KOLEKSI</h3>
+        <hr>
+        <table class="table table-bordered border-dark">
+            <h4>Tabel Rambut</h4>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Id</th>
+                <th scope="col">Harga Jual</th>
+                <th scope="col">Tipe Rambut</th>
+
+                {% if role == 'admin' %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+            {% for data in result %}
+            <tr scope="row">
+                <td>{{ forloop.counter }}.</td>
+                <td>{{ data.id_koleksi }}</td>
+                <td>{{ data.harga }}</td>
+                <td>{{ data.tipe }}</td>
+
+                {% if role == 'admin' %}
+                <td>
+                    <a href="/koleksi/delete/{{ data.id }}">
+                        <button type="button" class="btn btn-danger" >
+                            DELETE
+                        </button>
+                    </a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

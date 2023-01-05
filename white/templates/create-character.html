@@ -1,0 +1,51 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} Create Tokoh {% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+    <h3>Form Buat Tokoh</h3>
+    <hr>
+    <form action="" method="POST" class="d-flex flex-column gap-3">
+        {% csrf_token %}
+        <div class="d-flex mx-auto gap-2">
+            <label class="form-label" for="name">Nama: </label>
+            <input class="form-control w-75" required type="text" id="name" name="name" placeholder="Enter Tokoh Name">
+        </div>
+
+        <div>
+            <label class="form-label" for="gender">Jenis kelamin: </label>
+            <select class="form-select" required id="gender" name="gender">
+                <option disabled selected>Pilih Jenis Kelamin</option>
+                <option>Pria</option>
+                <option>Wanita</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="form-label" for="skin">Warna kulit: </label>
+            <select class="form-select" required id="skin" name="skin">
+                <option disabled selected>Pilih Warna Kulit</option>
+                {% for code in skins %}
+                <option>{{ code.kode }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label class="form-label" for="job">Pekerjaan: </label>
+            <select class="form-select" required id="job" name="job">
+                <option disabled selected>Pilih Pekerjaan</option>
+                {% for job in jobs %}
+                <option>{{ job.nama }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-25 mx-auto">Simpan</button>
+    </form>
+</div>
+
+{% endblock %}

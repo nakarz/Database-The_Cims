@@ -1,0 +1,55 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} List Menggunakan Apparel {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="w-50 mx-auto my-3 text-center">
+        <h3>LIST MENGGUNAKAN APPAREL</h3>
+        <table class="table table-bordered border-dark">
+            <tr>
+                <th scope="col">No</th>
+
+                {% if role != 'admin' %}
+                <th scope="col">Username Pemain</th>
+                {% endif %}
+
+                <th scope="col">Nama Tokoh</th>
+                <th scope="col">Nama Apparel</th>
+                <th scope="col">Warna</th>
+                <th scope="col">Nama Pekerjaan</th>
+                <th scope="col">Kategori</th>
+
+                {% if role != 'admin' %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+
+            {% for data in result %}
+            <tr scope="row">
+                <td>{{ forloop.counter }}.</td>
+
+                {% if role != 'admin' %}
+                <td>{{ data.username_pengguna }}</td>
+                {% endif %}
+
+                <td>{{ data.nama_tokoh }}</td>
+                <td>{{ data.nama }}</td>
+                <td>{{ data.warna_apparel }}</td>
+                <td>{{ data.nama_pekerjaan }}</td>
+                <td>{{ data.kategori_apparel }}</td>
+
+                {% if role != 'admin' %}
+                <td>
+                    <a href="/use_apparel/delete/{{ data.nama_tokoh }}/{{ data.id_koleksi }}">
+                        <button type="button" class="btn btn-danger" >
+                            LEPAS
+                        </button>
+                    </a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} Misi Utama {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="card mx-auto m-5" style="width: 50%">
+    <div class="card-body">
+        <div class="text-center">
+            <h3>List Misi Utama</h3>
+            <hr>
+        </div>
+        <table class="table table-striped text-center">
+            <caption>List Misi Utama</caption>
+            <tr>
+                <th>Mission Name</th>
+                <th>Action</th>
+            </tr>
+
+            {% for mission in missions %}
+            <tr>
+                <td>{{ mission.nama_misi }}</td>
+                <td>
+                    <a class="btn btn-outline-dark" href="/main-mission/detail/{{ mission.nama_misi }}">Detail</a>
+                    {% if  mission.nama_misi in deletable and request.session.role == "admin" %}
+                    <a class="btn btn-outline-danger" href="delete?name={{ mission.nama_misi }}">Delete</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

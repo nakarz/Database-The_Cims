@@ -1,0 +1,37 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} The Cims {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div id="alert" class="alert alert-danger w-50 mx-auto my-4 fw-bold fs-5 text-center" role="alert"></div>
+    
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM UPDATE RUMAH</h3>
+        <hr>
+        <form method="POST" action="/koleksi/create_new_koleksi">
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newId" class="form-label px-3">Id: </label>
+                <input type="text" class="form-control w-75 h-25" name="new_id"
+                    id="newId" required placeholder="Enter new Id" />
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newNamaRumah" class="form-label px-3">Nama Rumah: </label>
+                <input type="text" class="form-control w-75 h-25" name="new_nama_rumah"
+                    id="newNamaRumah" required placeholder="Enter new Nama Rumah" />
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newHargaJual" class="form-label px-3">Harga Jual: </label>
+                <input type="text" class="form-control w-75 h-25" name="new_harga_jual"
+                    id="newHargaJual" required placeholder="Enter new Harga Jual" />
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newKapasitasBarang" class="form-label px-3">Kapasitas Barang: </label>
+                <input type="text" class="form-control w-75 h-25" name="new_kapasitas_barang"
+                    id="newKapasitasBarang" required placeholder="Enter new Kapasitas Barang" />
+            </div>
+        </form>
+        <button type="submit" class="btn btn-primary">SIMPAN</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} The Cims {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM BUAT RAMBUT</h3>
+        <hr>
+        <form method="POST" action="/koleksi/create_new_koleksi_rambut/">
+            {% csrf_token %}
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newId" class="form-label px-3">Id: </label>
+                <input type="text" class="form-control w-75 h-25" disabled name="new_id"
+                    id="newId" required placeholder="Enter new Id" />
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newHargaJual" class="form-label px-3">Harga Jual: </label>
+                <input type="text" class="form-control w-75 h-25" name="new_harga_jual"
+                    id="newHargaJual" required placeholder="Enter new Harga Jual" />
+            </div>
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newTipeRambut" class="form-label px-3">Tipe Rambut: </label>
+                <input type="text" class="form-control w-75 h-25" name="new_tipe_rambut"
+                    id="newTipeRambut" required placeholder="Enter new Tipe Rambut" />
+            </div>
+        <button type="submit" class="btn btn-primary">SIMPAN</button>
+    </form>
+</div>
+{% endblock %}

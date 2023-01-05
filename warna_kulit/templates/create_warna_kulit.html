@@ -1,0 +1,73 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} Create Warna Kulit {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div id="alert" class="alert alert-danger w-50 mx-auto my-4 fw-bold fs-5 text-center" role="alert"></div>
+    
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM BUAT WARNA KULIT</h3>
+        <hr>
+        <form method="POST" id="form">
+            {% csrf_token %}
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newColorCode" class="form-label px-3">Kode: </label>
+                <input type="text" class="form-control w-75 h-25"
+                    maxlength="7" id="newColorCode" required placeholder="Enter hexcode color" />
+            </div>
+
+            <button id="submit" class="btn btn-primary">SIMPAN</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(() => {
+            const alert = $('#alert')
+            alert.hide()
+            
+            $('#submit').click( e => {
+                e.preventDefault()
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/warna_kulit/create_new_warna_kulit/",
+                    data: { 
+                        new_code : $("#newColorCode").val(),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: data => {
+                        $("#newColorCode").val('')
+                        
+                        if (data.id == 1) {
+                            alert.empty().removeClass('alert-danger').addClass('alert-success')
+                            let alertContent = `<p id="alert-content" class="mb-0">${data.content}</p>`
+                            alert.append(alertContent)
+                            $('#submit').attr("disabled", "true").css('cursor', 'not-allowed')
+
+                        } else {
+                            alert.empty()
+                            let alertTitle = `<p id="alert-title" class="mb-0 border-bottom border-dark">${data.title}</p>`
+                            let alertContent = `<p id="alert-content" class="mb-0">${data.content}</p>`
+                            let alertClosing = `<p id="alert-closing" class="mb-0">${data.closing}</p>`
+                            alert.append(alertTitle, alertContent, alertClosing)
+                        }
+
+                        alert.show()
+                        setTimeout(() => {
+                            alert.hide()
+                        }, 4000)
+
+                        if (data.id == 1) {
+                            setTimeout(() => {
+                                window.location.replace("/warna_kulit/list/")
+                            }, 500)
+                        }
+
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

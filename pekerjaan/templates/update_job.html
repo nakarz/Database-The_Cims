@@ -1,0 +1,31 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} The Cims {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM UPDATE PEKERJAAN</h3>
+        <hr>
+
+        <form method="POST" action="/job/update_new_base_honor/{{ result.nama }}">
+            {% csrf_token %}
+
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newjob" class="form-label px-3">Nama Pekerjaan:</label>
+                <input type="text" value= "{{result.nama}}" disabled class="form-control w-50 h-25" name="newjob"
+                    id="newjob"/>
+            </div>
+
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newBH" class="form-label px-3">Base Honor: {{ result.base_honor }}</label>
+                <input type="number" class="form-control w-50 h-25" name="new_honor"
+                    id="newBH" required placeholder="Masukkan Base Honor" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">SIMPAN</button>
+        </form>
+        
+    </div>
+{% endblock %}

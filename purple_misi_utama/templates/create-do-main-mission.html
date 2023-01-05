@@ -1,0 +1,49 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} Buat Menjalankan Misi Utama {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+
+{% if error %}
+<div class="alert alert-danger mx-auto mt-3" role="alert" style="width: 50%">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card mx-auto m-5" style="width: 50%">
+    <div class="card-body">
+        <div class="text-center">
+            <h3>Form Buat Menjalankan Misi Utama</h3>
+            <hr>
+        </div>
+
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label" for="char_name">Nama tokoh:</label>
+                    <select class="form-select" name="char_name" id="char_name">
+                        {% for char in characters %}
+                        <option value="{{ char.nama }}">{{ char.nama }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="main_mission_name">Nama misi utama:</label>
+                    <select class="form-select" name="main_mission_name" id="main_mission_name">
+                        {% for mission in missions %}
+                        <option value="{{ mission.nama_misi }}">{{ mission.nama_misi }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div class="justify-content-around d-flex">
+                    <button type="submit" class="btn btn-outline-dark">Simpan</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

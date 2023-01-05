@@ -1,0 +1,42 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} Buat Makanan {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="card mx-auto m-5" style="width: 50%">
+    <div class="card-body">
+        <div class="text-center">
+            <h3>Form Buat Makanan</h3>
+            <hr>
+        </div>
+
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label" for="name">Nama makanan:</label>
+                    <input class="form-control" required id="name" name="name" type="text">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Harga:</label>
+                    <input class="form-control" required id="price" name="price" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="energy">Tingkat energi:</label>
+                    <input class="form-control" required id="energy" name="energy" type="number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="hunger">Tingkat Kelaparan:</label>
+                    <input class="form-control" required id="hunger" name="hunger" type="number">
+                </div>
+
+                <div class="justify-content-around d-flex">
+                    <button type="submit" class="btn btn-outline-dark">Simpan</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

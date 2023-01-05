@@ -1,0 +1,67 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} The Cims - Create Kategori Apparel {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM BUAT KATEGORI APPAREL</h3>
+        <hr>
+        <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3 d-flex justify-content-center">
+            <label for="newApparelCategory" class="form-label px-3">Nama Kategori: </label>
+            <input name="newApparelCategory" type="text" class="form-control w-75 h-25" id="newApparelCategory" required placeholder="Enter new category apparel" />
+        </div>
+            <button type="submit" class="btn btn-primary">SIMPAN</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(() => {
+            const alert = $('#alert')
+            alert.hide()
+            
+            $('#submit').click( e => {
+                e.preventDefault()
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/kategori_apparel/create_new_kategori_apparel/",
+                    data: { 
+                        new_code : $("#newApparelCategory").val()
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: data => {
+                        $("#newApparelCategory").val('')
+                        
+                        if (data.id == 1) {
+                            alert.empty().removeClass('alert-danger').addClass('alert-success')
+                            let alertContent = `<p id="alert-content" class="mb-0">${data.content}</p>`
+                            alert.append(alertContent)
+                            $('#submit').attr("disabled", "true").css('cursor', 'not-allowed')
+
+                        } else {
+                            alert.empty()
+                            let alertTitle = `<p id="alert-title" class="mb-0 border-bottom border-dark">${data.title}</p>`
+                            let alertContent = `<p id="alert-content" class="mb-0">${data.content}</p>`
+                            let alertClosing = `<p id="alert-closing" class="mb-0">${data.closing}</p>`
+                            alert.append(alertTitle, alertContent, alertClosing)
+                        }
+
+                        alert.show()
+                        setTimeout(() => {
+                            alert.hide()
+                        }, 4000)
+
+                        if (data.id == 1) {
+                            setTimeout(() => {
+                                window.location.replace("/kategori_apparel/list/")
+                            }, 500)
+                        }
+
+                    }
+                })
+            })
+        })
+{% endblock %}

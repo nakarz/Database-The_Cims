@@ -1,0 +1,20 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+<div class="p-5 text-center">
+    <h1>Hello {{ username }} 👋👋👋</h1>
+    <h3>Berikut info mengenai dirimu</h3>
+    <h5>Username: {{ username }}</h5>
+
+    {% if role == "user" %}
+    <h5>Email: {{ email }}</h5>
+    <h5>Nomor HP: {{ phone }}</h5>
+    <h5>Koin: {{ koin }}</h5>
+    {% endif %}
+</div>
+
+{% endblock %}

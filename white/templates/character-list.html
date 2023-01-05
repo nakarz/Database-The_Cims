@@ -1,0 +1,57 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} Tokoh {% endblock %}
+
+{% block content %}
+{% include "navbar.html" %}
+
+<div class="w-50 mx-auto my-3 text-center">
+    <h3>List Tokoh</h3>
+    <table class="table table-bordered border-dark">
+        <tr>
+            <th>No</th>
+            {% if request.session.role == 'admin' %}
+            <th>Username Pemain</th>
+            {% endif %}
+            <th>Nama</th>
+            <th>Jenis Kelamin</th>
+            <th>Status</th>
+            <th>XP</th>
+            <th>Energi</th>
+            <th>Kelaparan</th>
+            <th>Hubungan Sosial</th>
+            <th>Level</th>
+            <th>Action</th>
+        </tr>
+        {% for character in characters %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            {% if request.session.role == 'admin' %}
+            <td>{{ character.username_pengguna }}</td>
+            {% endif %}
+            <td>{{character.nama }}</td>
+            <td>{{character.jenis_kelamin }}</td>
+            <td>{{character.status }}</td>
+            <td>{{character.xp }}</td>
+            <td>{{character.energi }}</td>
+            <td>{{character.kelaparan }}</td>
+            <td>{{character.hubungan_sosial }}</td>
+            <td>{{character.level }}</td>
+            <td class="d-flex gap-3">
+                <a href="/character/detail?username={{ character.username_pengguna }}&char_name={{ character.nama }}"
+                    role="button" class="btn btn-primary"
+                >
+                    DETAIL
+                </a>
+                {% if request.session.role == 'user' %}
+                <a class="btn btn-secondary" href="/character/update?char_name={{ character.nama }}">
+                    UPDATE
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

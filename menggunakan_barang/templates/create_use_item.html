@@ -1,0 +1,48 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} The Cims {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+
+    {% if error %}
+    <div class="alert alert-danger mx-auto mt-3" role="alert" style="width: 50%">
+        {{ error }}
+    </div>
+    {% endif %}
+
+
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM BUAT MENGGUNAKAN BARANG</h3>
+        <hr>
+
+        <form method="POST" action="/use_item/create_new_use_item/">
+            {% csrf_token %}
+
+            <div class="mb-3 d-flex gap-3 justify-content-center w-50 mx-auto">
+                <p>Nama Tokoh: </p>
+                <select id="pilihan_tokoh" name="pilihan_tokoh" class="form-select h-50">
+                    
+                    {% for data in tokoh %}
+                    <option value="{{ data.nama }}">{{ data.nama }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3 d-flex gap-3 justify-content-center w-50 mx-auto">
+                <p>Barang: </p>
+                <select id="pilihan_item" name="pilihan_item" class="form-select h-50">
+
+                    {% for data in item %}
+                    <option value="{{ data.id_koleksi }}">{{ data.id_koleksi }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">PAKAI</button>
+
+        </form>
+    </div>
+    
+    </script>
+{% endblock %}

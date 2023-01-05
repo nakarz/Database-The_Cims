@@ -1,0 +1,27 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} Update Level {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM UPDATE LEVEL</h3>
+        <hr>
+        <form method="POST" action="/level/update_new_xp/{{ result.level }}">
+            {% csrf_token %}
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newLevel" class="form-label px-3">Level: </label>
+                <input type="number" value="{{ result.level }}" disabled class="form-control w-25 h-25 text-black-50" name="new_level"
+                    id="newLevel" required placeholder="Enter new Level" />
+            </div>
+
+            <div class="mb-3 d-flex justify-content-center">
+                <label for="newXP" class="form-label px-3">XP: {{ result.xp }}</label>
+                <input type="number" class="form-control w-25 h-25" name="new_xp"
+                    id="newXP" required placeholder="Enter new XP" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">SIMPAN</button>
+        </form>
+    </div>
+{% endblock %}

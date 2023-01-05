@@ -1,0 +1,26 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block link %}<link rel="stylesheet" href="{% static 'login.css' %}">{% endblock %}
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+<div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <h3>Login Here</h3>
+    
+    <label for="username">Username</label>
+    <input type="text" placeholder="Username" id="username" name="username">
+    
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" id="password" name="password">
+    <button type="submit">Login</button>
+    <p class="text-center text-muted mt-4 mb-0">Don't have an account yet? <a href="/register"
+        class="fw-bold text-body"><u>Register here</u></a></p>
+</form>
+
+{% endblock %}

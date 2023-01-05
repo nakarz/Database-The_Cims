@@ -1,0 +1,60 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} Create Menggunakan Apparel {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+        <h3>FORM BUAT MENGGUNAKAN APPAREL</h3>
+        <hr>
+        <form method="POST" action="/use_apparel/create_new_use_apparel/">
+            {% csrf_token %}
+            <div class="mb-3 d-flex gap-3 justify-content-center w-50 mx-auto">
+                <p>Nama Tokoh: </p>
+                <select id="select-data-tokoh" name="pilihan_tokoh" class="form-select h-50" onchange="getValueFromSelect()">
+                    <option disabled selected>Pilih Nama Tokoh</option>
+                    {% for data in result %}
+                    <option value="{{ data.nama_tokoh }}">{{ data.nama_tokoh }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3 d-flex gap-3 justify-content-center w-50 mx-auto">
+                <p>Apparel: </p>
+                <select id="select-data-apparel" name="pilihan_id_apparel" disabled class="form-select">
+                    <option disabled selected>Pilih ID Apparel</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">PAKAI</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(() => {
+            $('#select-data-tokoh').css('cursor', 'pointer')
+            $('#select-data-apparel').css('cursor', 'not-allowed')
+        })
+        
+        const getValueFromSelect = () => {
+            const elemen = $('#select-data-apparel')
+            elemen.attr("disabled", "true").css('cursor', 'not-allowed')
+
+            $.ajax({
+                type: "GET",
+                url: "/use_apparel/get_id_apparel",
+                data: {
+                    pilihan_tokoh : $('#select-data-tokoh').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success : data => {
+                    // console.log(data.result)
+                    elemen.empty().append('<option disabled selected>Pilih ID Apparel</option>')
+
+                    for (data of data.result) { elemen.append(`<option value="${data}">${data}</option>`) }
+                    elemen.removeAttr("disabled").css('cursor', 'pointer')
+                }
+            })
+        }
+    </script>
+{% endblock %}

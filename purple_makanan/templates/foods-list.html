@@ -1,0 +1,45 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} Makanan {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="card mx-auto m-5" style="width: 60%">
+    <div class="card-body">
+        <div class="text-center">
+            <h3>List Makanan</h3>
+            <hr>
+        </div>
+        <table class="table table-striped">
+            <caption>List Makanan</caption>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Harga</th>
+                <th>Tingkat Energi</th>
+                <th>Tingkat Kelaparan</th>
+                {% if is_admin %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+            {% for food in foods %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ food.nama }}</td>
+                <td>{{ food.harga }}</td>
+                <td>{{ food.tingkat_energi }}</td>
+                <td>{{ food.tingkat_kelaparan }}</td>
+                {% if is_admin %}
+                <td>
+                    <a class="btn btn-outline-dark" href="update?name={{ food.nama }}">Update</a>
+                    {% if food.nama in deletable %}
+                    <a class="btn btn-outline-danger" href="delete?name={{ food.nama }}">Delete</a>
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

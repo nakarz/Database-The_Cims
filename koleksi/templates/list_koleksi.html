@@ -1,0 +1,18 @@
+{% extends "skeleton.html" %} {% load static %}
+
+{% block title %} The Cims {% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+        <div class="w-50 mx-auto text-center my-3 p-3 border border-3 border-dark">
+            <h3>MENU LIST KOLEKSI</h3>
+            <hr>
+            <div class="card-body">
+                <a href= "/koleksi/list/list_rambut" class="border-bottom btn btn-primary text-center"> RAMBUT </a>
+                <a href= "/koleksi/list/list_mata" class="border-bottom btn btn-primary text-center"> MATA </a>
+                <a href= "/koleksi/list/list_rumah" class="border-bottom btn btn-primary text-center"> RUMAH </a>
+                <a href= "/koleksi/list/list_barang" class="border-bottom btn btn-primary text-center"> BARANG </a>
+                <a href= "/koleksi/list/list_apparel" class="border-bottom btn btn-primary text-center"> APPAREL </a>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "skeleton.html" %} {% load static %}
+{% block title %} Menjalankan Misi Utama {% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="card mx-auto m-5" style="width: 50%">
+    <div class="card-body">
+        <div class="text-center">
+            <h3>List Menjalankan Misi Utama</h3>
+            <hr>
+        </div>
+        <table class="table table-striped">
+            <caption>Status Menjalankan Misi Utama</caption>
+            <tr>
+                <th>No</th>
+                {% if is_admin %}
+                <th>Username Pengguna</th>
+                {% endif %}
+                <th>Nama Tokoh</th>
+                <th>Nama Misi</th>
+                <th>Status</th>
+                {% if not is_admin %}
+                <th>Action</th>
+                {% endif %}
+            </tr>
+
+            {% for mission in missions %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                {% if is_admin %}
+                <td>{{ mission.username_pengguna }}</td>
+                {% endif %}
+                <td>{{ mission.nama_tokoh }}</td>
+                <td>{{ mission.nama_misi }}</td>
+                <td>{{ mission.status }}</td>
+                {% if not is_admin %}
+                <td>
+                    {% if mission.status == 'Belum selesai' %}
+                    <a class="btn btn-outline-dark"
+                       href="do-mission/update?chara={{ mission.nama_tokoh }}&mission_name={{ mission.nama_misi }}">
+                        Update
+                    </a>
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
