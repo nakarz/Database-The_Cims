@@ -1,10 +1,6 @@
-# Case 1 - The Cims
+# Database The Cims
 
-### Kelompok E11
-- Ahmad Naufan W. - 2006533181
-- Erick Ezrandy - 2006595892
-- Indah Noviyanti - 2006464045
-- Najwa Kariza Anjelia - 2006463452
+Previous Deploment:
+https://e11-cims.herokuapp.com
 
-### Link Aplikasi
-[The Cims](https://e11-cims.herokuapp.com/)
+⚠️ Application error due to Heroku is no longer free anymore
